@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+const App = () => {
+  const [count, setCount] = useState(0);
+  const [color, setColor] = useState(0);
+
+  const colors = [
+    {color: "magenta"},
+    {color: "gold"},
+    {color: "orange"},
+    {color: "#42EADDFF"},
+    {color: "#FCE77D"},
+    {color: "#4831D4"},
+    {color: "#E2D1F9"},
+    {color: "#990011FF"},
+    {color: "#FCEDDA"},
+  ];
+
+  const IncNum = () => {
+    setCount(count + 1);
+  };
+  const DecNum = () => {
+    setCount(count - 1);
+  };
+
+  const handleClick = () => setColor(color + 1 < colors.length ? color + 1 : 0);
+
+  const callDouble = () => {
+    DecNum();
+    handleClick();
+  };
+  const callDoubleInc = () => {
+    IncNum();
+    handleClick();
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="container">
+      <button onClick={callDouble}> - </button>
+      <h1 style={{ color: colors[color].color}}> {count} </h1>
+      <button onClick={callDoubleInc}> + </button>
+      </div>
+      <button onClick={() => window.location.reload()}> Reload </button>
     </div>
   );
-}
+};
 
 export default App;
